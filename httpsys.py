@@ -19,7 +19,7 @@ def calculate_range(length):
 
     block_size = 100
     current_block = 1
-    range_header = "bytes=3-18446744073709551615"
+    range_header = "bytes=0-18446744073709551615"
     for i in range(length/block_size+1):
         next_block = current_block+block_size - 1
         range_header += ",{}-{}".format(current_block, next_block)
@@ -87,6 +87,7 @@ if __name__ == '__main__':
 
             request = "GET /{} HTTP/1.1\r\nHOST: {}\r\nCookie: {}\r\nRange: {}\r\n\r\n".format(cmd_options.uri,cmd_options.host,cmd_options.cookie,range_header)          
             recv_buffer = ''
+            print request
             s.send(request)
             try:
                 while True:
